@@ -9,9 +9,11 @@ import retrofit2.http.POST;
 
 public interface WebService {
     @FormUrlEncoded
-    @POST("login")
-    Call<ResponseBody> userLogin(
+    @POST("user_register")
+    Call<ResponseBody> registerUser(
+      @Field("name") String name,
+      @Field("document") String document,
       @Field("email") String email,
-      @Field("password") String password
+      @Field("telefono") String telefono
     );
 }

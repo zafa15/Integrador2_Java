@@ -8,14 +8,24 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitServer {
     private static final String BASE_URL="http://127.0.0.1:8000/api/";
+    private static RetrofitServer mInstance;
+    private Retrofit retrofit;
 
     private RetrofitServer(){
-                Retrofit retrofit = new Retrofit.Builder()
+                retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+    }
 
-                RetrofitServer retrofitServer = (RetrofitServer) retrofit.create(WebService.class);
+    public static synchronized RetrofitServer getInstance(){
+        if (mInstance == null){
+            mInstance = new RetrofitServer();
+        }
+        return mInstance;
+    }
 
+    public WebService getService(){
+        return (WebService) retrofit.create(RetrofitServer.class);
     }
 }

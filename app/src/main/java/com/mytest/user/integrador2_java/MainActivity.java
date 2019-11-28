@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         log_email = findViewById(R.id.log_email);
         log_password = findViewById(R.id.log_password);
 
-        login = findViewById(R.id.btn_ingresar);
+        login = (Button)findViewById(R.id.btn_ingresar);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
