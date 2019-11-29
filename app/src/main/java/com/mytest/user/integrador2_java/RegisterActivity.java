@@ -1,5 +1,6 @@
 package com.mytest.user.integrador2_java;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -8,18 +9,29 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
     EditText editname;
     EditText editemail;
     EditText editdocument;
     EditText edittelefono;
+
+    String URL = "http://192.168.83.107/integrador2/public/api/user_register";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,27 +76,39 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             return;
         }
 
-        /*Call<ResponseBody> call = RetrofitServer
-                .getInstance()
-                .getService()
-                .registerUser(name,document,email,telefono);
 
-        call.enqueue(new Callback<ResponseBody>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                    try {
-                        String s = response.body().string();
-                        Toast.makeText(RegisterActivity.this,s,Toast.LENGTH_SHORT).show();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+            public void onResponse(String response) {
+                if(!response.isEmpty()){
+                    //Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
+                    //startActivity(intent);
+                    Toast.makeText(RegisterActivity.this,"Creación Exitosa, usa tu DNI como contraseña",Toast.LENGTH_SHORT);
+                    //finish();
+                }else{
+                    Toast.makeText(RegisterActivity.this,"El usuario no se pudo conectar",Toast.LENGTH_SHORT);
+                }
             }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(RegisterActivity.this,error.toString(),Toast.LENGTH_SHORT);
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> parametros = new HashMap<String, String>();
+                parametros.put("name",editname.getText().toString());
+                parametros.put("email",editemail.getText().toString());
+                parametros.put("document",editdocument.getText().toString());
+                parametros.put("telefono",edittelefono.getText().toString());
+                return parametros;
+            }
+        };
 
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(RegisterActivity.this,t.getMessage(),Toast.LENGTH_SHORT).show();
-            }
-        });*/
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+
     }
 
     @Override

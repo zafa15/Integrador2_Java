@@ -22,6 +22,54 @@
         android:layout_marginBottom="20dp"
         />
 
+        <Spinner
+            android:id="@+id/categories"
+            android:layout_width="400dp"
+            android:layout_height="38dp"
+            android:layout_marginBottom="20dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:background="@color/txt_white"
+            android:layout_marginBottom="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Precio Mínimo: "/>
+                <EditText
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Precio Máximo: "/>
+                <EditText
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:gravity="center"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -188,6 +236,8 @@
                 </androidx.cardview.widget.CardView>
             </GridLayout>
         </ScrollView>
+
+
     </LinearLayout>
 
 

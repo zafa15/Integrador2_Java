@@ -1,5 +1,6 @@
 package com.mytest.user.integrador2_java;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private Button login;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                validUser("http://127.0.0.1:8000/api/login");
+                validUser("http://192.168.83.107/integrador2/public/api/login");
             }
         });
 
@@ -60,9 +61,10 @@ public class MainActivity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                if(response.isEmpty()){
+                if(!response.isEmpty()){
                     Intent intent = new Intent(MainActivity.this,WelcomeActivity.class);
                     startActivity(intent);
+                    finish();
                 }else{
                     Toast.makeText(MainActivity.this,"Usuario o contraseña incorrecta",Toast.LENGTH_SHORT);
                 }
