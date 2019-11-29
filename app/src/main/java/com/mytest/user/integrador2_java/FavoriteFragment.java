@@ -4,10 +4,13 @@ package com.mytest.user.integrador2_java;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
 
 
 /**
@@ -15,7 +18,8 @@ import android.view.ViewGroup;
  */
 public class FavoriteFragment extends Fragment {
 
-
+    RecyclerView recyclerFavoritos;
+    ArrayList<Favorites> arrayListFavorites;
     public FavoriteFragment() {
         // Required empty public constructor
     }
@@ -25,7 +29,9 @@ public class FavoriteFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favorite, container, false);
+        View vista = inflater.inflate(R.layout.fragment_favorite, container, false);
+        recyclerFavoritos = vista.findViewById(R.id.list_favorites);
+        return vista;
     }
 
 }
