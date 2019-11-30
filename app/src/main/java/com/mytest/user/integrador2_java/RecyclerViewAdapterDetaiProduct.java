@@ -36,4 +36,15 @@ public class RecyclerViewAdapterDetaiProduct extends RecyclerView.Adapter<Recycl
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
+
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        holder.address.setText(storelista.get(position).getAddres());
+        holder.ubiq.setImageResource(storelista.get(position).getImg_icon());
+    }
+
+    @Override
+    public int getItemCount() {
+        return storelista.size();
+    }
 }

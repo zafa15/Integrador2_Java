@@ -50,13 +50,15 @@ public class MainActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                validUser("http://192.168.83.107/integrador2/public/api/login");
+               // validUser("http://192.168.83.107/integrador2/public/api/login");
+                Intent intent = new Intent(MainActivity.this,WelcomeActivity.class);
+                startActivity(intent);
             }
         });
 
     }
 
-
+/*
     private void validUser(String URL){
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
@@ -87,5 +89,5 @@ public class MainActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
 
-    }
+    }*/
 }
